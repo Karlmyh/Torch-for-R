@@ -24,14 +24,17 @@ for (t in 1:kargs$iteration) {
   
   ####### l2 loss of rest of params
   l2_loss=0
+  n_params_others=0
   for (i in seq(1,length(model$parameters),2)){
-    l2_loss=l2_loss+kargs$lamda_2 * sum(abs(model$linear0)**2)
+    n_params_others=n_params_others+model$parameters[[i]]%>% length
+    l2_loss=l2_loss+kargs$lamda_2 * sum(abs(model$parameters[[i]])**2)
   }
+  l2_loss=l2_loss/n_params_others
  
   ####### l1 loss of first layer
   ####### can manipulate 
-
-  l1_loss=kargs$lamda_1 * nnf_smooth_l1_loss(model$linear0,rep(0,model$linear0 %>% length))
+  n_params_layer0=model$linear0 %>% length
+  l1_loss=kargs$lamda_1 * nnf_smooth_l1_loss(model$linear0,rep(0,n_params_layer0))/n_params_layer0
   
   
   ####### bce loss

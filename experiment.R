@@ -19,14 +19,14 @@ y_test=prepared_data[[4]][[experiment_set]]
 
 
 # creat model
-layer_width<-c(100,50,10)
+layer_width<-c(100,200,10)
 model<-creat_model(layer_width)
 
 # hyperparameters
 kargs<-NULL
 kargs$learning_rate <- 0.1
-kargs$lamda_1=0.05
-kargs$lamda_2=0.005
+kargs$lamda_1=0.5
+kargs$lamda_2=0.01
 kargs$iteration=400
 
 # train model
